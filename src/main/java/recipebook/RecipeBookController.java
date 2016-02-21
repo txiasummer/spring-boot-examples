@@ -27,7 +27,7 @@ public class RecipeBookController {
         if (recipes != null) {
             model.addAttribute("recipes", recipes);
         }
-        return "readingList";
+        return "recipes";
     }
 
     @RequestMapping(method=RequestMethod.POST)
