@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+		maven { url "https://repo.spring.io/libs-release" }
+		mavenLocal()
+		mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$boot")
+    }
+}
+
+subprojects {
+	apply plugin: 'groovy'
+	apply plugin: 'idea'
+	apply plugin: 'spring-boot'
+
+	repositories {
+		maven { url "https://repo.spring.io/libs-release" }
+		mavenLocal()
+		mavenCentral()
+	}
+
+    dependencies {
+		compile "org.slf4j:slf4j-api:$slf4j"
+		compile "org.springframework.boot:spring-boot-starter-batch"
+		compile "org.codehaus.groovy:groovy-all:$groovy"
+
+		testCompile "org.spockframework:spock-core:$spock"
+		testCompile "org.spockframework:spock-spring:$spock"
+		testCompile "org.springframework.batch:spring-batch-test:$springBatchTest"
+		testCompile "org.springframework:spring-test:$spring"
+		testRuntime "com.h2database:h2:$h2database"
+		testCompile "cglib:cglib:$cglib"
+
+		runtime "ch.qos.logback:logback-classic:$logback"
+		runtime "org.slf4j:log4j-over-slf4j:$log4J"
+    }
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.10'
+}
