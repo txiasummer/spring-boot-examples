@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Recipe Book</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+
+<body>
+<h2>Your Reading List</h2>
+<div th:unless="${#lists.isEmpty(recipe)}">
+    <dl th:each="recipe : ${recipes}">
+        <dt class="bookHeadline">
+            <span th:text="${recipe.name}">Name</span> by
+            <span th:text="${recipe.type}">Type</span>
+            (calories: <span th:text="${recipe.calories}">calories</span>)
+        </dt>
+        <dd class="bookDescription">
+          <span th:if="${recipe.description}"
+                th:text="${recipe.description}">Description</span>
+          <span th:if="${recipe.description eq null}">
+                No description available</span>
+        </dd>
+    </dl>
+</div>
+<div th:if="${#lists.isEmpty(recipes)}">
+    <p>You have no recipes in your book</p>
+</div>
+
+
+<hr/>
+
+<h3>Create a Recipe</h3>
+<form method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" size="50"/><br/>
+    <label for="type">Type:</label>
+    <input type="text" name="author" size="50"/><br/>
+    <label for="calories">Calories:</label>
+    <input type="text" name="calories" size="15"/><br/>
+    <label for="description">Description:</label><br/>
+    <textarea name="description" cols="80" rows="5"></textarea><br/>
+    <input type="submit"/>
+</form>
+
+</body>
+</html>
